@@ -586,21 +586,21 @@ function isInternalImplementationClass(path: string): boolean {
   // Example: packages/BlobDownloadBuilder
   const parts = path.split('.')
   let hasUserFacingClass = false
-  
+
   for (let i = 1; i < parts.length; i++) {
     const part = parts[i]
     if (part.includes('/')) {
       // Extract the actual class name from the path segment
       // Example: "packages/StorageAnalyticsApi" -> "StorageAnalyticsApi"
       const className = part.split('/').pop() || part
-      
+
       // Allow user-facing API classes even if they have / in their path
       // Examples: packages/StorageAnalyticsApi, packages/StorageVectorsClient
       if (isUserFacingClass(className)) {
         hasUserFacingClass = true
         continue // Don't filter out user-facing classes
       }
-      
+
       // Filter out internal implementation classes
       return true
     }

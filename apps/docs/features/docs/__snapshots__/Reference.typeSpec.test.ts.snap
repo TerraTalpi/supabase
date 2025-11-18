@@ -11188,33 +11188,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                               "type": "object",
                               "properties": [
                                 {
-                                  "name": "client_id",
+                                  "name": "id",
                                   "type": {
                                     "type": "intrinsic",
                                     "name": "string"
                                   },
                                   "comment": {
                                     "shortText": "Unique identifier for the OAuth client (UUID)"
-                                  }
-                                },
-                                {
-                                  "name": "client_name",
-                                  "type": {
-                                    "type": "intrinsic",
-                                    "name": "string"
-                                  },
-                                  "comment": {
-                                    "shortText": "Human-readable name of the OAuth client"
-                                  }
-                                },
-                                {
-                                  "name": "client_uri",
-                                  "type": {
-                                    "type": "intrinsic",
-                                    "name": "string"
-                                  },
-                                  "comment": {
-                                    "shortText": "URI of the OAuth client's website"
                                   }
                                 },
                                 {
@@ -11225,6 +11205,26 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                                   },
                                   "comment": {
                                     "shortText": "URI of the OAuth client's logo"
+                                  }
+                                },
+                                {
+                                  "name": "name",
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "string"
+                                  },
+                                  "comment": {
+                                    "shortText": "Human-readable name of the OAuth client"
+                                  }
+                                },
+                                {
+                                  "name": "uri",
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "string"
+                                  },
+                                  "comment": {
+                                    "shortText": "URI of the OAuth client's website"
                                   }
                                 }
                               ]
@@ -11318,6 +11318,211 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
         },
         "comment": {
           "shortText": "Retrieves details about an OAuth authorization request.\\nUsed to display consent information to the user.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth.\\n\\nThis method returns authorization details including client info, scopes, and user information.\\nIf the response includes a redirect_uri, it means consent was already given - the caller\\nshould handle the redirect manually if needed."
+        }
+      },
+      "@supabase/supabase-js.AuthOAuthServerApi.listGrants": {
+        "name": "@supabase/supabase-js.AuthOAuthServerApi.listGrants",
+        "params": [],
+        "ret": {
+          "type": {
+            "type": "promise",
+            "name": "Promise",
+            "awaited": {
+              "type": "union",
+              "name": "AuthOAuthGrantsResponse",
+              "subTypes": [
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "array",
+                        "name": "T",
+                        "elemType": {
+                          "name": "OAuthGrant",
+                          "type": "object",
+                          "properties": [
+                            {
+                              "name": "client",
+                              "type": {
+                                "name": "OAuthAuthorizationClient",
+                                "type": "object",
+                                "properties": [
+                                  {
+                                    "name": "id",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "Unique identifier for the OAuth client (UUID)"
+                                    }
+                                  },
+                                  {
+                                    "name": "logo_uri",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "URI of the OAuth client's logo"
+                                    }
+                                  },
+                                  {
+                                    "name": "name",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "Human-readable name of the OAuth client"
+                                    }
+                                  },
+                                  {
+                                    "name": "uri",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "URI of the OAuth client's website"
+                                    }
+                                  }
+                                ]
+                              },
+                              "comment": {
+                                "shortText": "OAuth client information"
+                              }
+                            },
+                            {
+                              "name": "granted_at",
+                              "type": {
+                                "type": "intrinsic",
+                                "name": "string"
+                              },
+                              "comment": {
+                                "shortText": "Timestamp when the grant was created (ISO 8601 date-time)"
+                              }
+                            },
+                            {
+                              "name": "scopes",
+                              "type": {
+                                "type": "array",
+                                "elemType": {
+                                  "type": "intrinsic",
+                                  "name": "string"
+                                }
+                              },
+                              "comment": {
+                                "shortText": "Array of scopes granted to this client"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "error",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    },
+                    {
+                      "name": "error"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "comment": {
+          "shortText": "Lists all OAuth grants that the authenticated user has authorized.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth."
+        }
+      },
+      "@supabase/supabase-js.AuthOAuthServerApi.revokeGrant": {
+        "name": "@supabase/supabase-js.AuthOAuthServerApi.revokeGrant",
+        "params": [
+          {
+            "name": "options",
+            "type": {
+              "type": "object",
+              "properties": [
+                {
+                  "name": "clientId",
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  },
+                  "comment": {
+                    "shortText": "The OAuth client identifier (UUID) to revoke access for"
+                  }
+                }
+              ]
+            },
+            "comment": {
+              "shortText": "Revocation options"
+            }
+          }
+        ],
+        "ret": {
+          "type": {
+            "type": "promise",
+            "name": "Promise",
+            "awaited": {
+              "type": "union",
+              "name": "AuthOAuthRevokeGrantResponse",
+              "subTypes": [
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data"
+                    },
+                    {
+                      "name": "error",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    },
+                    {
+                      "name": "error"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "comment": {
+          "shortText": "Revokes a user's OAuth grant for a specific client.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth.\\n\\nRevocation marks consent as revoked, deletes active sessions for that OAuth client,\\nand invalidates associated refresh tokens."
         }
       },
       "@supabase/supabase-js.GoTrueClient._refreshSession": {
@@ -50579,33 +50784,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                               "type": "object",
                               "properties": [
                                 {
-                                  "name": "client_id",
+                                  "name": "id",
                                   "type": {
                                     "type": "intrinsic",
                                     "name": "string"
                                   },
                                   "comment": {
                                     "shortText": "Unique identifier for the OAuth client (UUID)"
-                                  }
-                                },
-                                {
-                                  "name": "client_name",
-                                  "type": {
-                                    "type": "intrinsic",
-                                    "name": "string"
-                                  },
-                                  "comment": {
-                                    "shortText": "Human-readable name of the OAuth client"
-                                  }
-                                },
-                                {
-                                  "name": "client_uri",
-                                  "type": {
-                                    "type": "intrinsic",
-                                    "name": "string"
-                                  },
-                                  "comment": {
-                                    "shortText": "URI of the OAuth client's website"
                                   }
                                 },
                                 {
@@ -50616,6 +50801,26 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                                   },
                                   "comment": {
                                     "shortText": "URI of the OAuth client's logo"
+                                  }
+                                },
+                                {
+                                  "name": "name",
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "string"
+                                  },
+                                  "comment": {
+                                    "shortText": "Human-readable name of the OAuth client"
+                                  }
+                                },
+                                {
+                                  "name": "uri",
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "string"
+                                  },
+                                  "comment": {
+                                    "shortText": "URI of the OAuth client's website"
                                   }
                                 }
                               ]
@@ -50709,6 +50914,211 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
         },
         "comment": {
           "shortText": "Retrieves details about an OAuth authorization request.\\nUsed to display consent information to the user.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth.\\n\\nThis method returns authorization details including client info, scopes, and user information.\\nIf the response includes a redirect_uri, it means consent was already given - the caller\\nshould handle the redirect manually if needed."
+        }
+      },
+      "@supabase/auth-js.AuthOAuthServerApi.listGrants": {
+        "name": "@supabase/auth-js.AuthOAuthServerApi.listGrants",
+        "params": [],
+        "ret": {
+          "type": {
+            "type": "promise",
+            "name": "Promise",
+            "awaited": {
+              "type": "union",
+              "name": "AuthOAuthGrantsResponse",
+              "subTypes": [
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "array",
+                        "name": "T",
+                        "elemType": {
+                          "name": "OAuthGrant",
+                          "type": "object",
+                          "properties": [
+                            {
+                              "name": "client",
+                              "type": {
+                                "name": "OAuthAuthorizationClient",
+                                "type": "object",
+                                "properties": [
+                                  {
+                                    "name": "id",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "Unique identifier for the OAuth client (UUID)"
+                                    }
+                                  },
+                                  {
+                                    "name": "logo_uri",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "URI of the OAuth client's logo"
+                                    }
+                                  },
+                                  {
+                                    "name": "name",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "Human-readable name of the OAuth client"
+                                    }
+                                  },
+                                  {
+                                    "name": "uri",
+                                    "type": {
+                                      "type": "intrinsic",
+                                      "name": "string"
+                                    },
+                                    "comment": {
+                                      "shortText": "URI of the OAuth client's website"
+                                    }
+                                  }
+                                ]
+                              },
+                              "comment": {
+                                "shortText": "OAuth client information"
+                              }
+                            },
+                            {
+                              "name": "granted_at",
+                              "type": {
+                                "type": "intrinsic",
+                                "name": "string"
+                              },
+                              "comment": {
+                                "shortText": "Timestamp when the grant was created (ISO 8601 date-time)"
+                              }
+                            },
+                            {
+                              "name": "scopes",
+                              "type": {
+                                "type": "array",
+                                "elemType": {
+                                  "type": "intrinsic",
+                                  "name": "string"
+                                }
+                              },
+                              "comment": {
+                                "shortText": "Array of scopes granted to this client"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "error",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    },
+                    {
+                      "name": "error"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "comment": {
+          "shortText": "Lists all OAuth grants that the authenticated user has authorized.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth."
+        }
+      },
+      "@supabase/auth-js.AuthOAuthServerApi.revokeGrant": {
+        "name": "@supabase/auth-js.AuthOAuthServerApi.revokeGrant",
+        "params": [
+          {
+            "name": "options",
+            "type": {
+              "type": "object",
+              "properties": [
+                {
+                  "name": "clientId",
+                  "type": {
+                    "type": "intrinsic",
+                    "name": "string"
+                  },
+                  "comment": {
+                    "shortText": "The OAuth client identifier (UUID) to revoke access for"
+                  }
+                }
+              ]
+            },
+            "comment": {
+              "shortText": "Revocation options"
+            }
+          }
+        ],
+        "ret": {
+          "type": {
+            "type": "promise",
+            "name": "Promise",
+            "awaited": {
+              "type": "union",
+              "name": "AuthOAuthRevokeGrantResponse",
+              "subTypes": [
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data"
+                    },
+                    {
+                      "name": "error",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": [
+                    {
+                      "name": "data",
+                      "type": {
+                        "type": "literal",
+                        "value": null
+                      }
+                    },
+                    {
+                      "name": "error"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "comment": {
+          "shortText": "Revokes a user's OAuth grant for a specific client.\\nOnly relevant when the OAuth 2.1 server is enabled in Supabase Auth.\\n\\nRevocation marks consent as revoked, deletes active sessions for that OAuth client,\\nand invalidates associated refresh tokens."
         }
       },
       "@supabase/auth-js.GoTrueClient.exchangeCodeForSession": {
@@ -80880,7 +81290,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                   },
                   "isOptional": true,
                   "comment": {
-                    "shortText": "Custom fetch implementation (optional)\\nUseful for testing or custom request handling"
+                    "shortText": "Custom fetch implementation (optional)\\nUseful for testing or custom request handling",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 },
                 {
@@ -80898,7 +81314,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                   },
                   "isOptional": true,
                   "comment": {
-                    "shortText": "Custom headers to include in all requests"
+                    "shortText": "Custom headers to include in all requests",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 }
               ]
@@ -80912,7 +81334,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a StorageVectorsClient that can manage buckets, indexes, and vectors.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a StorageVectorsClient that can manage buckets, indexes, and vectors.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.createBucket": {
@@ -80994,7 +81422,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a new vector bucket\\nVector buckets are containers for vector indexes and their data\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a new vector bucket\\nVector buckets are containers for vector indexes and their data\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.deleteBucket": {
@@ -81076,7 +81510,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes a vector bucket\\nBucket must be empty before deletion (all indexes must be removed first)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes a vector bucket\\nBucket must be empty before deletion (all indexes must be removed first)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.from": {
@@ -81100,7 +81540,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Access operations for a specific vector bucket\\nReturns a scoped client for index and vector operations within the bucket\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Access operations for a specific vector bucket\\nReturns a scoped client for index and vector operations within the bucket\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.getBucket": {
@@ -81182,7 +81628,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves metadata for a specific vector bucket\\nReturns bucket configuration including encryption settings and creation time\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves metadata for a specific vector bucket\\nReturns bucket configuration including encryption settings and creation time\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.listBuckets": {
@@ -81299,7 +81751,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists vector buckets with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists vector buckets with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsClient.throwOnError": {
@@ -81312,7 +81770,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.StorageVectorsError.constructor": {
@@ -81445,7 +81909,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a new VectorBucketApi instance\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a new VectorBucketApi instance\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketApi.createBucket": {
@@ -81527,7 +81997,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a new vector bucket\\nVector buckets are containers for vector indexes and their data\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a new vector bucket\\nVector buckets are containers for vector indexes and their data\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketApi.deleteBucket": {
@@ -81609,7 +82085,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes a vector bucket\\nBucket must be empty before deletion (all indexes must be removed first)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes a vector bucket\\nBucket must be empty before deletion (all indexes must be removed first)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketApi.getBucket": {
@@ -81691,7 +82173,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves metadata for a specific vector bucket\\nReturns bucket configuration including encryption settings and creation time\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves metadata for a specific vector bucket\\nReturns bucket configuration including encryption settings and creation time\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketApi.listBuckets": {
@@ -81808,7 +82296,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists vector buckets with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists vector buckets with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketApi.throwOnError": {
@@ -81821,7 +82315,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.constructor": {
@@ -81909,7 +82409,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a helper that automatically scopes all index operations to the provided bucket.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a helper that automatically scopes all index operations to the provided bucket.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.createIndex": {
@@ -81991,7 +82497,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a new vector index in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a new vector index in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.deleteIndex": {
@@ -82073,7 +82585,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes an index from this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes an index from this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.getIndex": {
@@ -82155,7 +82673,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves metadata for a specific index in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves metadata for a specific index in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope": {
@@ -82179,7 +82703,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Access operations for a specific index within this bucket\\nReturns a scoped client for vector data operations\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Access operations for a specific index within this bucket\\nReturns a scoped client for vector data operations\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.listIndexes": {
@@ -82261,7 +82791,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists indexes in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists indexes in this bucket\\nConvenience method that automatically includes the bucket name\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorBucketScope.throwOnError": {
@@ -82274,7 +82810,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.constructor": {
@@ -82364,7 +82906,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a VectorDataApi bound to a Storage Vectors deployment.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a VectorDataApi bound to a Storage Vectors deployment.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.deleteVectors": {
@@ -82481,7 +83029,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes vectors by their keys in batch\\nAccepts 1-500 keys per request\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes vectors by their keys in batch\\nAccepts 1-500 keys per request\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.getVectors": {
@@ -82620,7 +83174,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves vectors by their keys in batch\\nOptionally includes vector data and/or metadata in response\\nAdditional permissions required when returning data or metadata\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves vectors by their keys in batch\\nOptionally includes vector data and/or metadata in response\\nAdditional permissions required when returning data or metadata\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.listVectors": {
@@ -82790,7 +83350,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists/scans vectors in an index with pagination\\nSupports parallel scanning via segment configuration for high-throughput scenarios\\nAdditional permissions required when returning data or metadata\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists/scans vectors in an index with pagination\\nSupports parallel scanning via segment configuration for high-throughput scenarios\\nAdditional permissions required when returning data or metadata\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.putVectors": {
@@ -82963,7 +83529,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Inserts or updates vectors in batch (upsert operation)\\nAccepts 1-500 vectors per request. Larger batches should be split\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Inserts or updates vectors in batch (upsert operation)\\nAccepts 1-500 vectors per request. Larger batches should be split\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.queryVectors": {
@@ -83144,7 +83716,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Queries for similar vectors using approximate nearest neighbor (ANN) search\\nReturns top-K most similar vectors based on the configured distance metric\\nSupports optional metadata filtering (requires GetVectors permission)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Queries for similar vectors using approximate nearest neighbor (ANN) search\\nReturns top-K most similar vectors based on the configured distance metric\\nSupports optional metadata filtering (requires GetVectors permission)\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorDataApi.throwOnError": {
@@ -83157,7 +83735,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.constructor": {
@@ -83247,7 +83831,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates an API client for managing vector indexes.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates an API client for managing vector indexes.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.createIndex": {
@@ -83264,6 +83854,15 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                   "type": {
                     "type": "literal",
                     "value": "float32"
+                  },
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 },
                 {
@@ -83271,6 +83870,15 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                   "type": {
                     "type": "intrinsic",
                     "name": "number"
+                  },
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 },
                 {
@@ -83292,6 +83900,15 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                         "value": "dotproduct"
                       }
                     ]
+                  },
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 },
                 {
@@ -83299,6 +83916,15 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                   "type": {
                     "type": "intrinsic",
                     "name": "string"
+                  },
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 },
                 {
@@ -83323,13 +83949,31 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
                       }
                     ]
                   },
-                  "isOptional": true
+                  "isOptional": true,
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
+                  }
                 },
                 {
                   "name": "vectorBucketName",
                   "type": {
                     "type": "intrinsic",
                     "name": "string"
+                  },
+                  "comment": {
+                    "shortText": "",
+                    "tags": [
+                      {
+                        "tag": "alpha",
+                        "text": ""
+                      }
+                    ]
                   }
                 }
               ]
@@ -83404,7 +84048,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a new vector index within a bucket\\nDefines the schema for vectors including dimensionality, distance metric, and metadata config\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a new vector index within a bucket\\nDefines the schema for vectors including dimensionality, distance metric, and metadata config\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.deleteIndex": {
@@ -83496,7 +84146,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes a vector index and all its data\\nThis operation removes the index schema and all vectors stored in the index\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes a vector index and all its data\\nThis operation removes the index schema and all vectors stored in the index\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.getIndex": {
@@ -83588,7 +84244,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves metadata for a specific vector index\\nReturns index configuration including dimension, distance metric, and metadata settings\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves metadata for a specific vector index\\nReturns index configuration including dimension, distance metric, and metadata settings\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.listIndexes": {
@@ -83715,7 +84377,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists vector indexes within a bucket with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists vector indexes within a bucket with optional filtering and pagination\\nSupports prefix-based filtering and paginated results\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexApi.throwOnError": {
@@ -83728,7 +84396,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.constructor": {
@@ -83823,7 +84497,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Creates a helper that automatically scopes all vector operations to the provided bucket/index names.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Creates a helper that automatically scopes all vector operations to the provided bucket/index names.\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.deleteVectors": {
@@ -83905,7 +84585,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Deletes vectors by keys from this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Deletes vectors by keys from this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.getVectors": {
@@ -83987,7 +84673,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Retrieves vectors by keys from this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Retrieves vectors by keys from this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.listVectors": {
@@ -84069,7 +84761,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Lists vectors in this index with pagination\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Lists vectors in this index with pagination\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.putVectors": {
@@ -84151,7 +84849,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Inserts or updates vectors in this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Inserts or updates vectors in this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.queryVectors": {
@@ -84233,7 +84937,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Queries for similar vectors in this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Queries for similar vectors in this index\\nConvenience method that automatically includes bucket and index names\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.VectorIndexScope.throwOnError": {
@@ -84246,7 +84956,13 @@ exports[`TS type spec parsing > matches snapshot 1`] = `
           }
         },
         "comment": {
-          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible."
+          "shortText": "Enable throwing errors instead of returning them in the response\\nWhen enabled, failed operations will throw instead of returning { data: null, error }\\n\\n**Private alpha:** Vector storage APIs are currently in private alpha and may not be accessible.",
+          "tags": [
+            {
+              "tag": "alpha",
+              "text": ""
+            }
+          ]
         }
       },
       "@supabase/storage-js.packages/BlobDownloadBuilder.default.constructor": {
