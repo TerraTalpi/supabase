@@ -7440,6 +7440,10 @@ functions:
           supabase.removeAllChannels()
           ```
 
+  - id: file-buckets
+    title: 'Overview'
+    notes: |
+      This section contains methods for working with File Buckets.
   - id: list-buckets
     title: listBuckets()
     $ref: '@supabase/storage-js.packages/StorageBucketApi.default.listBuckets'
@@ -8479,10 +8483,6 @@ functions:
   - id: storage-js-storageclient-from
     title: StorageClient.from()
     $ref: '@supabase/storage-js.StorageClient.from'
-  - id: storage-vector-list
-    title: 'Overview'
-    notes: |
-      This section contains methods for working with Storage Vectors.
   - id: storage-js-storagevectorsclient-from
     title: StorageVectorsClient.from()
     $ref: '@supabase/storage-js.StorageVectorsClient.from'
@@ -8504,7 +8504,7 @@ functions:
           // List indexes in this bucket
           const { data } = await bucket.listIndexes()
           ```
-  - id: vector-buckets-list
+  - id: vector-buckets
     title: 'Overview'
     notes: |
       This section contains methods for working with Vector Buckets.
@@ -8641,7 +8641,7 @@ functions:
           const bucket = client.bucket('embeddings-prod')
           const { data } = await bucket.listIndexes({ prefix: 'documents-' })
           ```
-  - id: vector-data-list
+  - id: vector-data
     title: 'Overview'
     notes: |
       This section contains methods for working with Vector Data.
@@ -8782,7 +8782,7 @@ functions:
           client.throwOnError()
           const { data } = await client.putVectors(options) // throws on error
           ```
-  - id: vector-index-list
+  - id: vector-index
     title: 'Overview'
     notes: |
       This section contains methods for working with Vector Index.
