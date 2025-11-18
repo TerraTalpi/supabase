@@ -4,7 +4,7 @@ info:
   id: reference/supabase-js
   title: Supabase Javascript Client
   description: |
-
+    
     Supabase JavaScript.
 
   definition: spec/enrichments/tsdoc_v2/combined.json
@@ -9009,18 +9009,56 @@ functions:
   - id: storage-js-storagevectorsclient-constructor
     title: new StorageVectorsClient()
     $ref: '@supabase/storage-js.StorageVectorsClient.constructor'
+    examples:
+      - id: storage-js-storagevectorsclient-constructor-typedoc-example-1
+        name: Example 1
+        code: |-
+          ```typescript
+          const client = new StorageVectorsClient(url, options)
+          ```
   - id: storage-js-vectorbucketscope-constructor
     title: new VectorBucketScope()
     $ref: '@supabase/storage-js.VectorBucketScope.constructor'
+    examples:
+      - id: storage-js-vectorbucketscope-constructor-typedoc-example-1
+        name: Example 1
+        code: |-
+          ```typescript
+          const bucket = client.bucket('embeddings-prod')
+          ```
   - id: storage-js-vectordataapi-constructor
     title: new VectorDataApi()
     $ref: '@supabase/storage-js.VectorDataApi.constructor'
+    examples:
+      - id: storage-js-vectordataapi-constructor-typedoc-example-1
+        name: Example 1
+        code: |-
+          ```typescript
+          const client = new VectorDataApi(url, headers)
+          ```
   - id: storage-js-vectorindexapi-constructor
     title: new VectorIndexApi()
     $ref: '@supabase/storage-js.VectorIndexApi.constructor'
+    examples:
+      - id: storage-js-vectorindexapi-constructor-typedoc-example-1
+        name: Example 1
+        code: |-
+          ```typescript
+          const client = new VectorIndexApi(url, headers)
+          ```
   - id: storage-js-vectorindexscope-constructor
     title: new VectorIndexScope()
     $ref: '@supabase/storage-js.VectorIndexScope.constructor'
+    examples:
+      - id: storage-js-vectorindexscope-constructor-typedoc-example-1
+        name: Example 1
+        code: >-
+          ```typescript
+
+          const index =
+          client.bucket('embeddings-prod').index('documents-openai')
+
+          ```
   - id: realtime-js-websocketlikeconstructor-constructor
     title: new WebSocketLikeConstructor()
     $ref: '@supabase/realtime-js.WebSocketLikeConstructor.constructor'
