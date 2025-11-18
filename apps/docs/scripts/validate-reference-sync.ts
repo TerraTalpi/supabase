@@ -372,10 +372,16 @@ function isUserFacingClass(className: string): boolean {
     return false
   }
 
+  // Extract the actual class name if it contains a path separator
+  // Example: "packages/StorageAnalyticsApi" -> "StorageAnalyticsApi"
+  const actualClassName = className.includes('/')
+    ? className.split('/').pop() || className
+    : className
+
   // Check for user-facing patterns
   const userFacingPatterns = [/Client$/, /Api$/, /Builder$/, /Channel$/, /Scope$/, /Manager$/]
 
-  return userFacingPatterns.some((pattern) => pattern.test(className))
+  return userFacingPatterns.some((pattern) => pattern.test(actualClassName))
 }
 
 /**
@@ -572,23 +578,42 @@ function isDocumentedReexport(path: string, yamlRefs: Map<string, YamlFunction>)
  *
  * Internal classes have patterns like:
  * - @supabase/storage-js.packages/BlobDownloadBuilder.default.constructor
- * - Classes accessed via .default export
- * - Classes with / in their module path
+ * - Classes accessed via .default export (unless they're user-facing API classes)
+ * - Classes with / in their module path (unless they're user-facing API classes)
  */
 function isInternalImplementationClass(path: string): boolean {
-  // Check for .default. pattern (module default exports)
-  if (path.includes('.default.')) {
-    return true
-  }
-
   // Check for / in class name (internal module structure)
   // Example: packages/BlobDownloadBuilder
   const parts = path.split('.')
+  let hasUserFacingClass = false
+  
   for (let i = 1; i < parts.length; i++) {
     const part = parts[i]
     if (part.includes('/')) {
+      // Extract the actual class name from the path segment
+      // Example: "packages/StorageAnalyticsApi" -> "StorageAnalyticsApi"
+      const className = part.split('/').pop() || part
+      
+      // Allow user-facing API classes even if they have / in their path
+      // Examples: packages/StorageAnalyticsApi, packages/StorageVectorsClient
+      if (isUserFacingClass(className)) {
+        hasUserFacingClass = true
+        continue // Don't filter out user-facing classes
+      }
+      
+      // Filter out internal implementation classes
       return true
     }
+  }
+
+  // Check for .default. pattern (module default exports)
+  // But allow it for user-facing API classes
+  if (path.includes('.default.')) {
+    // If we found a user-facing class earlier, allow .default exports
+    if (hasUserFacingClass) {
+      return false
+    }
+    return true
   }
 
   return false

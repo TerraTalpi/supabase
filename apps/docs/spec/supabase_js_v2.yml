@@ -7639,6 +7639,145 @@ functions:
           }
           ```
 
+  - id: analytics-buckets
+    title: 'Overview'
+    notes: |
+      This section contains methods for working with Analytics Buckets.
+  - id: storage-js-storageanalyticsapi-createbucket
+    title: Create a new analytics bucket
+    $ref: '@supabase/storage-js.packages/StorageAnalyticsApi.default.createBucket'
+    notes: |
+      - Creates a new analytics bucket using Iceberg tables
+      - Analytics buckets are optimized for analytical queries and data processing
+    examples:
+      - id: create-analytics-bucket
+        name: Create analytics bucket
+        isSpotlight: true
+        code: |
+          ```ts
+          const { data, error } = await supabase
+            .storage
+            .analytics
+            .createBucket('analytics-data')
+          ```
+        response: |
+          ```json
+          {
+            "data": {
+              "name": "analytics-data"
+            },
+            "error": null
+          }
+          ```
+      - id: storage-js-storageanalyticsapi-createbucket-typedoc-example-1
+        name: Example 2
+        code: >-
+          ```typescript
+
+          const { data, error } = await
+          storage.analytics.createBucket('analytics-data')
+
+          if (error) {
+            console.error('Failed to create analytics bucket:', error.message)
+          } else {
+            console.log('Created bucket:', data.name)
+          }
+
+          ```
+  - id: storage-js-storageanalyticsapi-listbuckets
+    title: List analytics buckets
+    $ref: '@supabase/storage-js.packages/StorageAnalyticsApi.default.listBuckets'
+    notes: |
+      - Retrieves the details of all Analytics Storage buckets within an existing project
+      - Only returns buckets of type 'ANALYTICS'
+    examples:
+      - id: list-analytics-buckets
+        name: List analytics buckets
+        isSpotlight: true
+        code: |
+          ```ts
+          const { data, error } = await supabase
+            .storage
+            .analytics
+            .listBuckets({
+              limit: 10,
+              offset: 0,
+              sortColumn: 'created_at',
+              sortOrder: 'desc'
+            })
+          ```
+        response: |
+          ```json
+          {
+            "data": [
+              {
+                "id": "analytics-data",
+                "name": "analytics-data",
+                "type": "ANALYTICS",
+                "created_at": "2024-05-22T22:26:05.100Z",
+                "updated_at": "2024-05-22T22:26:05.100Z"
+              }
+            ],
+            "error": null
+          }
+          ```
+      - id: storage-js-storageanalyticsapi-listbuckets-typedoc-example-1
+        name: Example 2
+        code: |-
+          ```typescript
+          const { data, error } = await storage.analytics.listBuckets({
+            limit: 10,
+            offset: 0,
+            sortColumn: 'created_at',
+            sortOrder: 'desc',
+            search: 'analytics'
+          })
+          if (data) {
+            console.log('Found analytics buckets:', data.length)
+            data.forEach(bucket => console.log(`- ${bucket.name}`))
+          }
+          ```
+  - id: storage-js-storageanalyticsapi-deletebucket
+    title: Delete an analytics bucket
+    $ref: '@supabase/storage-js.packages/StorageAnalyticsApi.default.deleteBucket'
+    notes: |
+      - Deletes an analytics bucket
+    examples:
+      - id: delete-analytics-bucket
+        name: Delete analytics bucket
+        isSpotlight: true
+        code: |
+          ```ts
+          const { data, error } = await supabase
+            .storage
+            .analytics
+            .deleteBucket('analytics-data')
+          ```
+        response: |
+          ```json
+          {
+            "data": {
+              "message": "Successfully deleted"
+            },
+            "error": null
+          }
+          ```
+      - id: storage-js-storageanalyticsapi-deletebucket-typedoc-example-1
+        name: Example 2
+        code: >-
+          ```typescript
+
+          const { data, error } = await
+          analyticsApi.deleteBucket('old-analytics-bucket')
+
+          if (error) {
+            console.error('Failed to delete bucket:', error.message)
+          } else {
+            console.log('Bucket deleted successfully:', data.message)
+          }
+
+          ```
+
   - id: from-upload
     title: from.upload()
     $ref: '@supabase/storage-js.packages/StorageFileApi.default.upload'
